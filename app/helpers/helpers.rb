@@ -1,6 +1,6 @@
 class Helpers
 
-  def current_user(session) 
+  def self.current_user(session) 
   session[:user_id] = User.id
   end
 
