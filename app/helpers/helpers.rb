@@ -1,16 +1,15 @@
 class Helpers
 
   def self.current_user(session) 
-  session[:user_id] = User.id
+    User.find_by(session[:user_id])
   end
 
-  def is_logged_in?(session)
-    @user = User.find_by(session[:user_id])
-    if
-    user_id != @user.id
-    puts "please Log on again"
+  def self.is_logged_in?(session)
+    @user = self.current_user(session)
+    if @user
+    true
   else
-    @user
-  end
+    false
+   end
   end
 end

@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css">  
   </head>
   <body id="page-top">
-    <form>
+    <form action="/model" method="POST">
+    Welcome <%= @user.username%>
+    Balance: <%= @user.balance%>
 <button type=submit value="logout">Log Out</button>
   </form>
   </body>
