@@ -4,6 +4,7 @@ class ApplicationController < Sinatra::Base
     set :views, Proc.new { File.join(root, "../views/") }
     enable :sessions unless test?
     set :session_secret, "secret"
+    set :show_exceptions => false
   end
 
   get '/' do
@@ -22,17 +23,16 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/account' do
-    user_id = session[:user_id]
-    @user = User.find_by(id: user_id)
-    if @user
-      redirect '/account'
-    else
-      erb :error
-    end
+    @user = Helpers.current_user(session)
+     if @user 
+        erb  :account
+     else
+        erb :error
+     end
   end
 
   get '/logout' do
-    User.clear
+    session.clear
     redirect '/'
   end
 
